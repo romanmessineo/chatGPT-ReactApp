@@ -1,4 +1,4 @@
-import { useState,useEffect  } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 import send from "./assets/send.svg";
@@ -17,12 +17,12 @@ function App() {
 
   useEffect(() => {
     document.querySelector(".layout").scrollTop =
-        document.querySelector(".layout").scrollHeight;
-}, [post]);
+      document.querySelector(".layout").scrollHeight;
+  }, [post]);
 
   const fetchBotResponse = async () => {
     const { data } = await axios.post(
-      "https://chatgpt-reactapp.onrender.com", 
+      "https://chatgpt-reactapp.onrender.com",
       /* "http://localhost:4000", */
       { input },
       {
@@ -33,7 +33,7 @@ function App() {
     );
     return data;
   };
-  
+
   const onSubmit = () => {
     if (input.trim() === "") return;
     updatePosts(input);
@@ -44,7 +44,7 @@ function App() {
       updatePosts(res.bot.trim(), true);
     });
   };
-  
+
   const autoTypingBotResponse = (text) => {
     let index = 0;
     let interval = setInterval(() => {
@@ -70,7 +70,7 @@ function App() {
       }
     });
   };
-  
+
   const updatePosts = (post, isBot, isLoading) => {
     if (isBot) {
       autoTypingBotResponse(post);
@@ -85,17 +85,17 @@ function App() {
       onSubmit();
     }
   };
-  
+
   return (
     <main className="chatGPT-app">
       <section className="chat-container">
         <div className="layout">
           {post.map((post, index) => (
             <div
-            key={index}
-            className={`chat-bubble ${
-              post.type === "bot" || post.type === "loading" ? "bot" : ""
-            }`}
+              key={index}
+              className={`chat-bubble ${
+                post.type === "bot" || post.type === "loading" ? "bot" : ""
+              }`}
             >
               <div className="avatar">
                 <img
@@ -103,7 +103,7 @@ function App() {
                     post.type === "bot" || post.type === "loading" ? bot : user
                   }
                   alt="avatar"
-                  />
+                />
               </div>
               {post.type === "loading" ? (
                 <div className="loader">
@@ -125,7 +125,7 @@ function App() {
           placeholder="Pregunta lo que quieras!"
           onChange={(e) => setInput(e.target.value)}
           onKeyUp={onKeyUp}
-          />
+        />
         <div className="send-button" onClick={onSubmit}>
           <img src={send} alt="enviar" />
         </div>
@@ -135,4 +135,3 @@ function App() {
 }
 
 export default App;
-
