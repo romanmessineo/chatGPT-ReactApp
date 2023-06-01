@@ -87,7 +87,7 @@ function App() {
   };
 
   return (
-    <main className="chatGPT-app">
+    <main className="chatGPT-app lg:max-w-1/2 md:max-w-95">
       <section className="chat-container">
         <div className="layout">
           {post.map((post, index) => (
